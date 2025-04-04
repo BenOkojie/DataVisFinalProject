@@ -84,15 +84,18 @@ def sum_vals(p1,p2,p3,dt):
     total = nvalue + fvalue + pvalue
     return total,nvalue,fvalue,pvalue
   for i in range(1,len(places)):
+    
     canada_values = location_data[places[i]].iloc[normalindex]
     normalvalue = canada_values.replace(',', '', regex=True).astype(int)
     normalvalue = normalvalue.iloc[0]
+    
     canada_values = location_data[places[i]].iloc[nindex]
     nvalue = canada_values.replace(',', '', regex=True).astype(int)
     nvalue = nvalue.iloc[0]
     canada_values = location_data[places[i]].iloc[findex]
     fvalue = canada_values.replace(',', '', regex=True).astype(int)
     fvalue = fvalue.iloc[0]
+    
     canada_values = location_data[places[i]].iloc[pindex]
     pvalue = canada_values.replace(',', '', regex=True).astype(int)
     pvalue = pvalue.iloc[0]
@@ -104,17 +107,17 @@ def sum_vals(p1,p2,p3,dt):
       p3arr.append(pvalue)
     else:
       if dt =="e":
-        total = normalvalue/nvalue + normalvalue/fvalue + normalvalue/pvalue
-
+        total = (nvalue/normalvalue)*100 + (fvalue/normalvalue)*100 + (pvalue/normalvalue)*100
+        
       if dt=="p1":
-        total = normalvalue/nvalue
-
+        total = (nvalue/normalvalue)*100
+        
       if dt=="p2":
-        total = normalvalue/fvalue
-
+        total = (fvalue/normalvalue)*100
+        
       if dt=="p3":
-        total = normalvalue/pvalue
-
+        total =(pvalue/normalvalue)*100
+        
       res.append(total)
   if dt =="all":
     return res,p1arr,p2arr,p3arr
